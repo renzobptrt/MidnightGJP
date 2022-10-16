@@ -9,7 +9,7 @@ public class ViewInGame : MonoBehaviour
     public static ViewInGame sharedInstance;
 
     public TextMeshProUGUI coinsText;
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI valueProgressText;
     public TextMeshProUGUI maxScoreText;
 
     public Slider sliderProgress;
@@ -42,17 +42,18 @@ public class ViewInGame : MonoBehaviour
 
             // float maxScore = PlayerPrefs.GetFloat("maxScore", 0);
             // this.maxScoreText.text = maxScore.ToString("f2");
+            
+            if(finalPosition.x - target.position.x >= 0)
+            {
+                sliderProgress.value = (Mathf.Abs(finalPosition.x - startPosition.x) - Mathf.Abs(finalPosition.x - target.position.x))
+/ Mathf.Abs(finalPosition.x - startPosition.x);
 
-            sliderProgress.value = (Mathf.Abs(finalPosition.x - startPosition.x) - Mathf.Abs(finalPosition.x - target.position.x))
-     / Mathf.Abs(finalPosition.x -startPosition.x);
+                float currentValue = sliderProgress.value * 100f;
+                int valueInt = (int)currentValue;
+                this.valueProgressText.text = valueInt.ToString() + " %";
+            }
+
         }
-    }
-
-    public void SetModulesToSlider()
-    {
-        //Si posicion vehiculo < statposition no pasa nada
-
-
     }
 
     public void SetStartPosition(Transform newStartPosition)

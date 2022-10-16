@@ -12,7 +12,7 @@ public class LevelGenerator : MonoBehaviour
     //Todos los bloques disponibles
     public List<LevelBlock> allTheLevelBLocks = new List<LevelBlock>();
     //Posicion de generacion del primer bloque
-    public Transform levelStartPoint;
+    public Transform levelStartPoint, levelFinalPoint;
     //Bloques actuales en la escena
     public List<LevelBlock> currentLevelBlocks = new List<LevelBlock>();
 
@@ -48,7 +48,9 @@ public class LevelGenerator : MonoBehaviour
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = currentLevelBlocks[currentLevelBlocks.Count - 1].exitPoint.position
                             - currentBlock.startPoint.position;
-            ViewInGame.sharedInstance.SetFinalPosition(currentBlock.gameObject.transform.Find("Enviroment/Castle/FinalPosition"));
+            Transform finalPosition = currentBlock.gameObject.transform.Find("Enviroment/Castle/FinalPosition");
+            //finalPosition.parent = null;
+            ViewInGame.sharedInstance.SetFinalPosition(levelFinalPoint);
         }
         else
         {
