@@ -16,8 +16,8 @@ TagManager:
   - Vehicle
   - Enemy
   - Ground
-  - 
-  - 
+  - GroundEnemy
+  - Enemies
   - 
   - 
   - 

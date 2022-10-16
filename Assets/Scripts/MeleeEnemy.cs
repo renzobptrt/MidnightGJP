@@ -16,21 +16,32 @@ public class MeleeEnemy : EnemyController
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (GameManager.sharedInstance.gameState == GameState.inGame)
+        if (GetAwakeEnemy())
         {
-            if (GetAwakeEnemy())
+            if (rg2d.velocity.x > -0.01f && rg2d.velocity.x < 0.01f)
             {
-                moveEnemy(movement);
+                currentSpeed = -currentSpeed;
             }
+            Direccion();
+            Run(currentSpeed);
         }
     }
 
-    void moveEnemy(Vector2 direction)
+    void Run(float velocity)
     {
-        print("Intento moverme");
-        rb.velocity = new Vector2(-1 * moveSpeed, rb.velocity.y);
-        //rb.MovePosition(new Vector2(transform.position.x + (direction.x * moveSpeed * Time.deltaTime),transform.position.y));
-        
+        rg2d.velocity = new Vector2(velocity, rg2d.velocity.y);
+    }
+
+    void Direccion()
+    {
+        if (currentSpeed > 0.1f)
+        {
+            rg2d.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (currentSpeed < -0.1f)
+        {
+            rg2d.transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     private Vector2 movement = Vector2.zero;
