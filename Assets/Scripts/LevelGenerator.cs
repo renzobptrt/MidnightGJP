@@ -40,6 +40,7 @@ public class LevelGenerator : MonoBehaviour
             currentBlock = (LevelBlock)Instantiate(firstLevelBlock);
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = levelStartPoint.position;
+            ViewInGame.sharedInstance.SetStartPosition(levelStartPoint);
         }
         else if (currentLevelBlocks.Count == numberOfBlocks - 1)
         {
@@ -47,6 +48,7 @@ public class LevelGenerator : MonoBehaviour
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = currentLevelBlocks[currentLevelBlocks.Count - 1].exitPoint.position
                             - currentBlock.startPoint.position;
+            ViewInGame.sharedInstance.SetFinalPosition(currentBlock.gameObject.transform.Find("Enviroment/Castle/FinalPosition"));
         }
         else
         {
