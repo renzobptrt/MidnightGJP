@@ -16,6 +16,8 @@ public class LevelGenerator : MonoBehaviour
     //Bloques actuales en la escena
     public List<LevelBlock> currentLevelBlocks = new List<LevelBlock>();
 
+    public int numberOfBlocks = 5;
+
     void Awake()
     {
         sharedInstance = this;
@@ -75,7 +77,7 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateInitialBlock()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < numberOfBlocks; i++)
         {
             AddLevelBlock();
         }
