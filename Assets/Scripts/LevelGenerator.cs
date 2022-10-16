@@ -76,7 +76,4 @@ public class LevelGenerator : MonoBehaviour
             AddLevelBlock();
         }
     }
-
-
-
 }
