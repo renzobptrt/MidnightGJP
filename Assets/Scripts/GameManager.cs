@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Posibles estados del videojuego
 public enum GameState
 {
     inGame,
     inGameOver,
-    inMenu
+    inMenuInventory
 }
 
 public class GameManager : MonoBehaviour
@@ -16,16 +18,9 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
 
     //Variable para saber en que estado del juego nos encontramos
-    public GameState gameState = GameState.inMenu;
+    public GameState gameState = GameState.inGame;
 
     public Canvas menuCanvas, inGameCanvas, gameOverCanvas;
-
-    public int collectedCoin = 0;
-
-    //AudioClips para cambio de musica
-    public AudioClip inMenuTrack;
-    public AudioClip inGameTrack;
-    //private MusicManager theAM;
 
     void Awake()
     {
@@ -34,37 +29,22 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        BackToMenu();
-        //Buscar objeto que tiene la musica
-        //theAM = FindObjectOfType<MusicManager>();
-    }
+        //GameOverCanvas
+        Button buttonBackToMainMenu = gameOverCanvas.transform.GetChild(0).Find("Button_MainMenu").GetComponent<Button>();
+        buttonBackToMainMenu.StopAllCoroutines();
+        buttonBackToMainMenu.onClick.AddListener(() => GoToMainMenu());
 
-    void Update()
-    {
-        if (Input.GetButtonDown("Start") && this.gameState != GameState.inGame)
-        {
-            StartGame();
-        }
+        Button buttonRepeat = gameOverCanvas.transform.GetChild(0).Find("Button_Repeat").GetComponent<Button>();
+        buttonRepeat.StopAllCoroutines();
+        buttonRepeat.onClick.AddListener(() => ResetGame());
 
-        if (Input.GetButtonDown("Cancel"))
-        {
-            BackToMenu();
-        }
+        StartGame();
+
     }
 
     public void StartGame()
     {
         setGameState(GameState.inGame);
-
-        CameraFollow.sharedInstance.ResetCameraPosition();
-
-        if (PlayerContoller.sharedInstance.transform.position.x > 10)
-        {
-            LevelGenerator.sharedInstance.RemoveAllTheBlocks();
-            LevelGenerator.sharedInstance.GenerateInitialBlock();
-        }
-        PlayerContoller.sharedInstance.StartPlayer();
-        this.collectedCoin = 0;
     }
 
     public void GameOver()
@@ -72,18 +52,14 @@ public class GameManager : MonoBehaviour
         setGameState(GameState.inGameOver);
     }
 
-    public void BackToMenu()
+    private void ResetGame()
     {
-        setGameState(GameState.inMenu);
+        
     }
 
-    public void ExitGame()
+    public void GoToMainMenu()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+        SceneManager.LoadScene("MainMenu");
     }
 
     void setGameState(GameState newGameState)
@@ -94,14 +70,6 @@ public class GameManager : MonoBehaviour
             menuCanvas.enabled = false;
             gameOverCanvas.enabled = false;
             inGameCanvas.enabled = true;
-
-            //Musica
-            if (inGameTrack != null)
-            {
-                //theAM.ChangeBGM(inGameTrack);
-                MusicManager.sharedInstance.ChangeBGM(inGameTrack);
-            }
-
         }
         else if (newGameState == GameState.inGameOver)
         {
@@ -109,28 +77,13 @@ public class GameManager : MonoBehaviour
             menuCanvas.enabled = false;
             gameOverCanvas.enabled = true;
             inGameCanvas.enabled = false;
-            //Musica
-            if (inMenuTrack != null)
-            {
-                //theAM.ChangeBGM(inMenuTrack);
-                MusicManager.sharedInstance.ChangeBGM(inMenuTrack);
-            }
-
         }
-        else if (newGameState == GameState.inMenu)
+        else if (newGameState == GameState.inMenuInventory)
         {
             menuCanvas.enabled = true;
             gameOverCanvas.enabled = false;
             inGameCanvas.enabled = false;
         }
         this.gameState = newGameState;
-    }
-
-
-    public void CollectCoins(int coinValue)
-    {
-        this.collectedCoin += coinValue;
-
-        Debug.Log("Llevamos recogidos: " + this.collectedCoin);
     }
 }

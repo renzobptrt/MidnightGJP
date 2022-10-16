@@ -28,11 +28,6 @@ public class LevelGenerator : MonoBehaviour
         GenerateInitialBlock();
     }
 
-    void Update()
-    {
-
-    }
-
     public void AddLevelBlock()
     {
         int randomIndex = Random.Range(0, allTheLevelBLocks.Count);
@@ -61,7 +56,6 @@ public class LevelGenerator : MonoBehaviour
 
     public void RemoveOldestLevelBlock()
     {
-        Debug.Log("VOy a destruir");
         LevelBlock oldestLevelBlock = currentLevelBlocks[0];
         currentLevelBlocks.Remove(oldestLevelBlock);
         Destroy(oldestLevelBlock.gameObject);
