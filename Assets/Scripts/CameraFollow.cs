@@ -5,11 +5,10 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public static CameraFollow sharedInstance;
-
-    public Transform target;
+    public Transform target = null;
 
     /* Dejar una pequeña distancia de seguimiento */
-    public Vector3 offset = new Vector3(0.1f, 0f, -10f);
+    public Vector3 offset = new Vector3(0f, 0f, -10f);
 
     /*  Tiempo donde la camara se quedara quita y luego 
         comenzara a seguir
@@ -28,6 +27,11 @@ public class CameraFollow : MonoBehaviour
         sharedInstance = this;
     }
 
+    void Start()
+    {
+        startPosition = target;
+    }
+
     public void ResetCameraPosition()
     {
         Vector3 destination;
@@ -38,23 +42,22 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        Vector3 posicionInicial = PlayerContoller.sharedInstance.getStartPosition();
-        /* Nota: Fondos siempre se configuran en la cámara */
-        /*if(target.position.x <= posicionInicial.x){
-            
-        }*/
-        Vector3 destination;
-        Vector3 destinationInicial;
+        Vector3 initialPosition = startPosition.position;//Posicion inicial de la camara, debera ser del vehiculo
+        /* Fondos siempre se configuran en la cámara */
+        Vector3 destination, startDestination;
+
         destination = new Vector3(target.position.x, offset.y, offset.z);
-        destinationInicial = new Vector3(posicionInicial.x, offset.y, offset.z);
+        startDestination = new Vector3(initialPosition.x, offset.y, offset.z);
         /* Mueve la camara de forma suave */
-        if (destination.x <= posicionInicial.x - 2)
+        if (destination.x <= initialPosition.x - 2)
         {
-            this.transform.position = Vector3.SmoothDamp(this.transform.position, destinationInicial, ref velocity, dampTime);
+            this.transform.position = Vector3.SmoothDamp(this.transform.position, startDestination, ref velocity, dampTime);
         }
         else
         {
             this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
         }
     }
+
+    private Transform startPosition = null;
 }
