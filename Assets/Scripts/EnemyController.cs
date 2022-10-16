@@ -14,9 +14,13 @@ public class EnemyController : MonoBehaviour
 
     protected Rigidbody2D rg2d;
 
+    protected Animator animatorController;
+    protected Collider2D collider;
+
     void Awake()
     {
         rg2d = GetComponent<Rigidbody2D>();
+        animatorController = GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -32,11 +36,9 @@ public class EnemyController : MonoBehaviour
 
     void  OnCollisionEnter2D(Collision2D otherCollider)
     {
-        if ( otherCollider.gameObject.tag == "Player")
-            
+        /*if ( otherCollider.gameObject.tag == "Player")
         {
             //otherCollider.GetComponent<PlayerContoller>().GetDamage();
-
             Destroy(this.gameObject);
         }
 
@@ -44,18 +46,29 @@ public class EnemyController : MonoBehaviour
         {
             otherCollider.transform.GetComponent<Vehicle>().GetDamage(damageValue);
             Destroy(this.gameObject);
-        }
+        }*/
     }
 
 
     public void SetAwakeEnemy( bool value)
     {
         awakeEnemy = value;
+        animatorController.SetTrigger("Awake");
     }
 
     public bool GetAwakeEnemy()
     {
         return awakeEnemy;
+    }
+
+    public bool GetIsAlive()
+    {
+        return isAlive;
+    }
+
+    public void DieEnemy()
+    {
+        isAlive = false;
     }
 
     public void SetTarget(Transform newTarget){
@@ -75,6 +88,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private bool awakeEnemy = false;
+    private bool isAlive = true;
     protected Vector3 directionToWatch = Vector3.zero;
     protected Transform target = null;
 }

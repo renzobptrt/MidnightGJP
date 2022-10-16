@@ -17,6 +17,7 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Cambiar input de boton
         if (isAbleToShoot && Input.GetKeyDown(KeyCode.Space))
         {
             Projectile newProjectile = Instantiate(projectilePrefab, shootPosition.position, transform.rotation);

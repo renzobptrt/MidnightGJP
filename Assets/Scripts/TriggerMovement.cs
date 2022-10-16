@@ -18,11 +18,11 @@ public class TriggerMovement : MonoBehaviour
         //Debug.Log("Girar enemigo");
         if (movimientoAdelante == true)
         {
-            Enemy.voltearEnemigo = true;
+            //Enemy.voltearEnemigo = true;
         }
         else
         {
-            Enemy.voltearEnemigo = false;
+            //Enemy.voltearEnemigo = false;
         }
         movimientoAdelante = !movimientoAdelante;
     }

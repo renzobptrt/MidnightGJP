@@ -22,13 +22,4 @@ public class Projectile : MonoBehaviour
         rb.velocity = direction * speed;
         Destroy(gameObject, destroyDelay);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
-    }
 }

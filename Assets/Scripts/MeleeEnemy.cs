@@ -10,8 +10,8 @@ public class MeleeEnemy : EnemyController
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<CapsuleCollider2D>();
     }
-
    
     public override void FixedUpdate()
     {
@@ -22,8 +22,12 @@ public class MeleeEnemy : EnemyController
             {
                 currentSpeed = -currentSpeed;
             }
-            Direccion();
-            Run(currentSpeed);
+            
+            if (GetIsAlive())
+            {
+                Direccion();
+                Run(currentSpeed);
+            }
         }
     }
 
@@ -42,6 +46,35 @@ public class MeleeEnemy : EnemyController
         {
             rg2d.transform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            //otherCollider.GetComponent<PlayerContoller>().GetDamage();
+            Die();
+        }
+
+        else if (collision.gameObject.tag == "Vehicle")
+        {
+            collision.transform.GetComponent<Vehicle>().GetDamage(damageValue);
+            Die();
+        }
+
+        if (collision.gameObject.tag == "Projectile")
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        collider.isTrigger = true;
+        rg2d.bodyType = RigidbodyType2D.Static;
+        DieEnemy();
+        animatorController.SetTrigger("Die");
+        Destroy(gameObject, 0.5f);
     }
 
     private Vector2 movement = Vector2.zero;
