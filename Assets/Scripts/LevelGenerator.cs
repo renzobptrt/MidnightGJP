@@ -8,7 +8,7 @@ public class LevelGenerator : MonoBehaviour
     //Patron singleton
     public static LevelGenerator sharedInstance;
     //Primer bloque en concreto
-    public LevelBlock firstLevelBlock;
+    public LevelBlock firstLevelBlock, lastLevelBlock;
     //Todos los bloques disponibles
     public List<LevelBlock> allTheLevelBLocks = new List<LevelBlock>();
     //Posicion de generacion del primer bloque
@@ -41,6 +41,13 @@ public class LevelGenerator : MonoBehaviour
             currentBlock.transform.SetParent(this.transform, false);
             spawnPosition = levelStartPoint.position;
         }
+        else if (currentLevelBlocks.Count == numberOfBlocks - 1)
+        {
+            currentBlock = (LevelBlock)Instantiate(lastLevelBlock);
+            currentBlock.transform.SetParent(this.transform, false);
+            spawnPosition = currentLevelBlocks[currentLevelBlocks.Count - 1].exitPoint.position
+                            - currentBlock.startPoint.position;
+        }
         else
         {
             currentBlock = (LevelBlock)Instantiate(allTheLevelBLocks[randomIndex]);
@@ -51,8 +58,9 @@ public class LevelGenerator : MonoBehaviour
 
         currentBlock.transform.position = spawnPosition;
         currentLevelBlocks.Add(currentBlock);
-
     }
+
+
 
     public void RemoveOldestLevelBlock()
     {
