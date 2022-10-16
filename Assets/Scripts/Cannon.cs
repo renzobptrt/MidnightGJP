@@ -17,14 +17,28 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mouseWorldPosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
-        transform.up = Vector2.MoveTowards(transform.up, direction, rotationSpeed * Time.deltaTime);
-
-        if (Input.GetMouseButtonDown(0))
+        if (isAbleToShoot && Input.GetKeyDown(KeyCode.Space))
         {
             Projectile newProjectile = Instantiate(projectilePrefab, shootPosition.position, transform.rotation);
             newProjectile.LaunchProjectile(transform.up);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            isAbleToShoot = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isAbleToShoot = false;
+        }
+    }
+
+    private bool isAbleToShoot = false;
 }

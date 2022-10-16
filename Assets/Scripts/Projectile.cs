@@ -25,7 +25,6 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Colisionando");
         if(collision.gameObject.tag == "Enemy")
         {
             Destroy(collision.gameObject);
