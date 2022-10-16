@@ -14,11 +14,11 @@ TagManager:
   - UI
   - Player
   - Vehicle
-  - Enemy
   - Ground
   - GroundEnemy
   - Enemies
-  - 
+  - Background
+  - Projectile
   - 
   - 
   - 
