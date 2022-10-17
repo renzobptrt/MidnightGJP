@@ -1241,8 +1241,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3527197661192159, guid: a325c6b7dc583c342a295ea05679217a, type: 3}
   m_PrefabInstance: {fileID: 5868066628748306237}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-=======
 --- !u!1001 &6259592296557150675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1309,7 +1307,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 557745358466746667, guid: 8954b1a96ff98324c83b3eb9a2436b6a, type: 3}
   m_PrefabInstance: {fileID: 6259592296557150675}
   m_PrefabAsset: {fileID: 0}
->>>>>>> 3ddfb09f98db8eb130abf18e0c82a68978003db4
 --- !u!1001 &7000101541103232348
 PrefabInstance:
   m_ObjectHideFlags: 0

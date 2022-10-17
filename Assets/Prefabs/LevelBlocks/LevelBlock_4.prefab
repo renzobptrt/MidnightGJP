@@ -759,8 +759,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0299146, y: 1.0299146}
   m_EdgeRadius: 0
-<<<<<<< HEAD
-=======
 --- !u!1 &5193963129715626214
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810625ac63f25704cb75bfce0d18d10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
->>>>>>> 3ddfb09f98db8eb130abf18e0c82a68978003db4
 --- !u!1 &5193963129827107068
 GameObject:
   m_ObjectHideFlags: 0
