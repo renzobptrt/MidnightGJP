@@ -11,7 +11,7 @@ public class KillTrigger : MonoBehaviour
         {
             Debug.Log("Jugador entro en zona de muerte");
             //PlayerContoller.sharedInstance.KillPlayer();
-            PlayerContoller.sharedInstance.Dead();
+            //PlayerContoller.sharedInstance.Dead();
         }
     }
 }
