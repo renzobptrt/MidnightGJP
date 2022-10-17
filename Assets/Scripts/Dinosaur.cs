@@ -34,7 +34,6 @@ public class Dinosaur : MonoBehaviour
         if (isBackToPlayer)
         {
             BackToPlayer();
-            Debug.LogError("Regresando");
         }
     }
 
