@@ -66,6 +66,12 @@ public class MeleeEnemy : EnemyController
         {
             Die();
         }
+
+        if (collision.gameObject.tag == "Dinosaur")
+        {
+            Die();
+            collision.transform.GetComponent<Dinosaur>().DestroyEnemy();
+        }
     }
 
     void Die()
