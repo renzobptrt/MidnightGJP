@@ -1249,6 +1249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5864540442161605167}
     m_Modifications:
+    - target: {fileID: 557745358466746661, guid: 8954b1a96ff98324c83b3eb9a2436b6a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 557745358466746666, guid: 8954b1a96ff98324c83b3eb9a2436b6a, type: 3}
       propertyPath: m_Name
       value: ExitZone
