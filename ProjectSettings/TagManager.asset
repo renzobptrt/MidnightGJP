@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+<<<<<<< HEAD
+  - ground
+=======
   - Dinosaur
+>>>>>>> 3ddfb09f98db8eb130abf18e0c82a68978003db4
   layers:
   - Default
   - TransparentFX
